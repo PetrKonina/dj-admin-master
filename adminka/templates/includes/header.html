@@ -1,0 +1,73 @@
+<header class="header">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-lg">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">Administration</a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% if 'view_user' in perms %}
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'view-users' %}">Users</a>
+                    </li>
+                    {% endif %}
+                    {% if 'view_group' in perms %}
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'view-groups' %}">Groups</a>
+                    </li>
+                    {% endif %}
+                    {% if 'view_notification' in perms %}
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'view-notifications' %}">Notifications</a>
+                    </li>
+                    {% endif %}
+                    {% if 'view_shipment' in perms %}
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'view-shipments' %}">Shipments</a>
+                    </li>
+                    {% endif %}
+                    {% if 'view_product' in perms %}
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'view-products' %}">Products</a>
+                    </li>
+                    {% endif %}
+                    {% if 'view_tag' in perms %}
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'view-tags' %}">Tags</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <div class="nav-item dropdown">
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        {{request.user.first_name}} {{request.user.last_name|slice:":1"}}.
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{% url 'user-settings' %}"
+                                >Account Settings</a
+                            >
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

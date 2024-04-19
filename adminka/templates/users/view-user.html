@@ -1,0 +1,68 @@
+{% extends 'base.html' %} 
+{% block title %}Adminka - User:{{user.get_full_name}}{% endblock %} 
+{% block content %}
+<main class="my-5 container">
+        {% include 'includes/breadcrumbs/view-breadcrumb.html' with model=user name="User" %}
+        {% include 'includes/delete-modal.html' with model="user" object=user%}
+    <div class="rounded-3 p-3 mb-5 shadow-lg">
+        <h1 class="h3">General info</h1>
+            <label for="name" class="form-label">Full name</label>
+            <input
+                type="text"
+                class="form-control"
+                id="name"
+                value="{{user.get_full_name}}"
+                disabled
+            />
+        {{form}}
+        <div class="mb-3">
+            <label for="joined" class="form-label">Date joined</label>
+            <input
+                type="date"
+                class="form-control"
+                id="joined"
+                value="{{user.date_joined|date:'Y-m-d'}}"
+                disabled
+            />
+        </div>
+        
+    </div>
+    {% if user.avatar %}
+        <div class="rounded-3 p-3 mb-5 shadow-lg">
+            <h2 class="h3">{{user.get_full_name}}'s avatar</h2>
+            <img
+                    src="{{user.avatar.url}}"
+                    alt="{{user.get_full_name}}'s avatar"
+                    height="400px"
+                    width="400px"
+                    class="border rounded-3"
+                />
+        </div>
+        {% endif %}
+    <div class="rounded-3 p-3 mb-5 shadow-lg">
+        <div class="d-flex justify-content-between">
+            <h2 class="fs-3 fw-bold text-center">Groups</h2>
+        </div>
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for group in groups %}
+                <tr>
+                    <th scope="row">
+                        {{group.id}}
+                    </th>
+                    <td>
+                        {{group.name}}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}
